@@ -1,0 +1,48 @@
+﻿<Window x:Class="Talent.WpfClient.MpaaRatingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Talent.WpfClient"
+        xmlns:domain="clr-namespace:Talent.Domain;assembly=Talent.Domain"
+        Title="Edit MPAA Rating" 
+        SizeToContent="WidthAndHeight"
+        MinWidth="300" Background="{DynamicResource WindowBackground}">
+    <Window.DataContext>
+        <local:MpaaRatingsViewModel />
+    </Window.DataContext>
+    <StackPanel>
+        <local:MpaaRatingView
+            Margin="12,12,12,4"
+            DataContext="{Binding SelectedItem}"/>
+        <StackPanel
+            Grid.Row="5" Grid.ColumnSpan="2"
+            Margin="0,0,0,4"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                x:Name="SaveButton"
+                Click="SaveButton_Click"
+                Command="{Binding SaveCommand}"
+                MinWidth="75"
+                IsDefault="True"
+                IsEnabled="{Binding SelectedItem.IsDirty}"
+                >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resources/accept.png" Height="16" />
+                    <TextBlock Margin="4">Save</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button
+                x:Name="CancelButton"
+                MinWidth="75"
+                Click="CancelButton_Click"
+                Command="{Binding CancelCommand}"
+                IsCancel="True">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resources/cancel.png" Height="16" />
+                    <TextBlock Margin="4">Cancel</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
+
